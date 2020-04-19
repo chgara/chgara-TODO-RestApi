@@ -1,4 +1,4 @@
-import { Router, IRouter } from 'express';
+import { Router, IRouter, NextFunction } from 'express';
 
 //Creating class that will manage routes
 class IndexRoutes {
@@ -14,7 +14,9 @@ class IndexRoutes {
     //A function where we manage the routes
     private routes(): void {
         this.router.route(`/`).get((req, res, nex) => {
-            res.send('Hellow in my API-Rest, go to github.com/chgara to know more');
+            res.send(
+                'This is the chgara TODO-List Rest-Api, go to https://github.com/chgara to know more',
+            );
         });
     }
 
