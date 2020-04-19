@@ -34,12 +34,12 @@ class AuthController {
             let message = {};
             if (register === '') {
                 message.error = 'Email or username exsits';
-                return res.json(message).status(400);
+                return res.status(400).json(message);
             }
             else {
                 message.success = 'Added user';
                 res.header('token', register);
-                return res.json(message).status(201);
+                return res.status(201).json(message);
             }
         });
     }
@@ -52,12 +52,12 @@ class AuthController {
             let message = {};
             if (login === '') {
                 message.error = 'Email or password are wrong';
-                return res.json(message).status(400);
+                return res.status(400).json(message);
             }
             else {
                 message.success = 'User loged';
                 res.header('token', login);
-                return res.json(message).status(200);
+                return res.status(200).json(message);
             }
         });
     }

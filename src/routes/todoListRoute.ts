@@ -1,4 +1,6 @@
 import { Router, IRouter } from 'express';
+import verify from './auth/verification';
+import todoListController from '../controllers/todoList.controller';
 
 //Creating class that will manage routes
 class TodoList {
@@ -13,7 +15,11 @@ class TodoList {
 
     //A function where we manage the routes
     private routes(): void {
-        this.router.route('/').get().post().put().delete();
+        this.router
+            .route('/')
+            .get(verify, todoListController.getTodoList)
+            .post(verify, todoListController.postTodoList)
+            .delete(verify, todoListController.deleteTodoList);
     }
 
     //Making a function to export the router of the class

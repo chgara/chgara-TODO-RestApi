@@ -54,6 +54,7 @@ class MysqlDB {
             return DbUser;
         });
     }
+    //Search the user but with the ID
     searchUserById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const sql = 'SELECT * FROM users WHERE id = ?';
@@ -61,6 +62,50 @@ class MysqlDB {
             const DBdata = rows[0];
             const DbUser = new user_1.DBuser(DBdata.username, DBdata.email, DBdata.password, DBdata.id);
             return DbUser;
+        });
+    }
+    //A funtion that will return a user TODOLIST
+    getTodoList(user) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const sql = 'SELECT * FROM list WHERE username = ?';
+            const rows = yield connection_1.default.query(sql, user.getUsername());
+            return rows;
+        });
+    }
+    //This function will add a TODO to the List
+    addTodo(user, todo) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const sql = 'INSERT INTO list(todo,username) VALUES(?,?)';
+            const rows = yield connection_1.default.query(sql, [todo, user.getUsername()]);
+            if (typeof rows === 'object') {
+                if (rows.affectedRows !== 1) {
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+            else {
+                return false;
+            }
+        });
+    }
+    //This delete a TODO from the list
+    deleteTodo(user, todo) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const sql = 'DELETE FROM list WHERE id = ? AND username = ?';
+            const rows = yield connection_1.default.query(sql, [todo.id, user.getUsername()]);
+            if (typeof rows === 'object') {
+                if (rows.affectedRows !== 1) {
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+            else {
+                return false;
+            }
         });
     }
     //Function to show if the username extists

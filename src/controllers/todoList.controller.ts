@@ -3,58 +3,73 @@ import {} from 'colors';
 import authServices from '../services/auth/authServices';
 import { AuthUser, DBuser } from '../models/user/user';
 import { Imessage } from './Iauth';
+import { Itodo, TodoList } from 'models/service/Ilist';
+import todoListServices from '../services/tasks/todoListServices';
+import TODO from '../models/service/list';
 
 //Creating a class to export the auth functions
-class AuthController {
+class TodoListController {
     constructor() {}
-    //For GET in api/auth/profile
-    public async getProfile(
+    //For GET in api/list
+    public async getTodoList(
         req: Request,
         res: Response,
         nex: NextFunction,
     ): Promise<Response> {
         const id: number = req.userId;
         const profile: DBuser = await authServices.profile(id);
-        return res.status(200).json(profile);
+        const todoList: TodoList = await todoListServices.getTodoList(profile);
+        return res.status(200).json(todoList);
     }
-    //For POST in api/auth/register
-    public async postRegister(
+    //For delete in api/list
+    public async deleteTodoList(
         req: Request,
         res: Response,
         nex: NextFunction,
     ): Promise<Response> {
-        const { username, email, password } = req.body;
-        const user: AuthUser = new AuthUser(username, email, password);
-        const register: string = await authServices.register(user);
+        const Id: number = req.userId;
+        const profile: DBuser = await authServices.profile(Id);
+        const { id, todo, created_at, username } = req.body;
         let message: Imessage = {};
-        if (register === '') {
-            message.error = 'Email or username exsits';
+        if (!id || !todo || !created_at || !username) {
+            message.error = 'Fill all the fields';
+            return res.status(400).json(message);
+        }
+        const Todo: TODO = new TODO(id, todo, created_at, username);
+        const deleteTodoList: boolean = await todoListServices.deleteTodo(profile, Todo);
+
+        if (!deleteTodoList) {
+            message.error = 'Something went wrong';
             return res.status(400).json(message);
         } else {
-            message.success = 'Added user';
-            res.header('token', register);
-            return res.status(201).json(message);
+            message.success = 'Deleted successfully';
+            return res.status(200).json(message);
         }
     }
-    //For POST in api/auth/login
-    public async postLogin(
+    //Add a todo in api/list
+    public async postTodoList(
         req: Request,
         res: Response,
         nex: NextFunction,
     ): Promise<Response> {
-        const { username, email, password } = req.body;
-        const user: AuthUser = new AuthUser(username, email, password);
-        const login: string = await authServices.login(user);
+        const id: number = req.userId;
+        const profile: DBuser = await authServices.profile(id);
+        const todo = req.body.todo;
         let message: Imessage = {};
-        if (login === '') {
-            message.error = 'Email or password are wrong';
+        if (!todo) {
+            message.error = 'Add a todo';
+            return res.status(400).json(message);
+        }
+        const addedTodo: boolean = await todoListServices.addTodo(profile, todo);
+
+        if (!addedTodo) {
+            message.error = 'Something went wrong';
             return res.status(400).json(message);
         } else {
-            message.success = 'User loged';
-            res.header('token', login);
+            message.success = 'Added successfully';
             return res.status(200).json(message);
         }
     }
 }
-const authController: AuthController = new AuthController();
-export default authController;
+const todoListController: TodoListController = new TodoListController();
+export default todoListController;

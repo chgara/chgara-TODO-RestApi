@@ -4,9 +4,11 @@ import morgan from 'morgan';
 import dotenv, { load } from 'dotenv';
 import AuthRoutes from './routes/authRoute';
 import IndexRoutes from './routes/indexRoute';
-
+import TodoListRoutes from './routes/todoListRoute';
+import { Itodo } from 'models/service/Ilist';
+import pool from './db/connection';
 //Connecting to the DB
-const pool = require('./db/connection');
+//const pool = require('./db/connection');
 
 //Creating class to make server objects
 class App {
@@ -39,6 +41,7 @@ class App {
     routes(): void {
         this.app.use('/api', IndexRoutes);
         this.app.use('/api/auth', AuthRoutes);
+        this.app.use('/api/list', TodoListRoutes);
     }
 
     //Make server listen on a port

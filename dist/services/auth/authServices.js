@@ -25,12 +25,12 @@ class AuthServices {
     register(user) {
         return __awaiter(this, void 0, void 0, function* () {
             const register = new register_1.default(user);
-            const success = yield register.main(database_1.default);
+            const success = yield register.main(this.database);
             if (!success) {
                 return '';
             }
             else {
-                const DbUser = yield register.getRegisterdUser(database_1.default);
+                const DbUser = yield register.getRegisterdUser(this.database);
                 const Token = jsonwebtoken_1.default.sign({ _id: DbUser.getId() }, process.env.JWT || 'secret token', { expiresIn: 60 * 60 * 24 * 7 });
                 return Token;
             }
@@ -40,12 +40,12 @@ class AuthServices {
     login(user) {
         return __awaiter(this, void 0, void 0, function* () {
             const login = new login_1.default(user);
-            const success = yield login.main(database_1.default);
+            const success = yield login.main(this.database);
             if (!success) {
                 return '';
             }
             else {
-                const DbUser = yield login.getLogedUser(database_1.default);
+                const DbUser = yield login.getLogedUser(this.database);
                 const Token = jsonwebtoken_1.default.sign({ _id: DbUser.getId() }, process.env.JWT || 'secret token', { expiresIn: 60 * 60 * 24 * 7 });
                 return Token;
             }
@@ -54,7 +54,7 @@ class AuthServices {
     profile(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const profile = new profile_1.default(id);
-            const user = yield profile.main(database_1.default);
+            const user = yield profile.main(this.database);
             return user;
         });
     }

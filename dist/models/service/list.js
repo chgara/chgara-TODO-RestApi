@@ -9,4 +9,5 @@ class TODO {
         this.username = username;
     }
 }
+exports.default = TODO;
 //# sourceMappingURL=list.js.map
