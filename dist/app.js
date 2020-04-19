@@ -9,8 +9,7 @@ const morgan_1 = __importDefault(require("morgan"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const authRoute_1 = __importDefault(require("./routes/authRoute"));
 const indexRoute_1 = __importDefault(require("./routes/indexRoute"));
-//Connecting to the DB
-const pool = require('./db/connection');
+const todoListRoute_1 = __importDefault(require("./routes/todoListRoute"));
 //Creating class to make server objects
 class App {
     constructor(port) {
@@ -22,6 +21,7 @@ class App {
         this.settings();
         this.midlewares();
         this.routes();
+        this.error();
         this.listen();
     }
     //Settings configuration for express
@@ -36,6 +36,13 @@ class App {
     routes() {
         this.app.use('/api', indexRoute_1.default);
         this.app.use('/api/auth', authRoute_1.default);
+        this.app.use('/api/list', todoListRoute_1.default);
+    }
+    error() {
+        this.app.use((req, res, next) => {
+            res.status(404).redirect('/api');
+            next();
+        });
     }
     //Make server listen on a port
     listen() {

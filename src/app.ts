@@ -1,12 +1,11 @@
-import express, { Application, urlencoded } from 'express';
+import express, { Application } from 'express';
 import { cyan, red } from 'colors';
 import morgan from 'morgan';
 import dotenv, { load } from 'dotenv';
 import AuthRoutes from './routes/authRoute';
 import IndexRoutes from './routes/indexRoute';
-
-//Connecting to the DB
-const pool = require('./db/connection');
+import TodoListRoutes from './routes/todoListRoute';
+import pool from './db/connection';
 
 //Creating class to make server objects
 class App {
@@ -22,6 +21,7 @@ class App {
         this.settings();
         this.midlewares();
         this.routes();
+        this.error();
         this.listen();
     }
 
@@ -39,6 +39,14 @@ class App {
     routes(): void {
         this.app.use('/api', IndexRoutes);
         this.app.use('/api/auth', AuthRoutes);
+        this.app.use('/api/list', TodoListRoutes);
+    }
+
+    error(): void {
+        this.app.use((req, res, next) => {
+            res.status(404).redirect('/api');
+            next();
+        });
     }
 
     //Make server listen on a port

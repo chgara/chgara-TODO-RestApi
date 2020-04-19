@@ -3,7 +3,6 @@ import {} from 'colors';
 import authServices from '../services/auth/authServices';
 import { AuthUser, DBuser } from '../models/user/user';
 import { Imessage } from './Iauth';
-import { token } from 'morgan';
 
 //Creating a class to export the auth functions
 class AuthController {

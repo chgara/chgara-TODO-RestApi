@@ -11,7 +11,7 @@ class IndexRoutes {
     //A function where we manage the routes
     routes() {
         this.router.route(`/`).get((req, res, nex) => {
-            res.send('Hellow in my API-Rest, go to github.com/chgara to know more');
+            res.send('This is the chgara TODO-List Rest-Api, go to https://github.com/chgara to know more');
         });
     }
     //Making a function to export the router of the class

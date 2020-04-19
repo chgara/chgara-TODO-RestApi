@@ -48,21 +48,21 @@ export class DBuser extends AuthUser {
         return this.id;
     }
 }
-export class User extends DBuser {
-    protected list: TodoList;
+// export class User extends DBuser {
+//     protected list: TodoList;
 
-    constructor(
-        name: string,
-        email: string,
-        id: number,
-        list: TodoList,
-        password: string,
-    ) {
-        super(name, email, password, id);
-        this.list = list;
-    }
+//     constructor(
+//         name: string,
+//         email: string,
+//         id: number,
+//         list: TodoList,
+//         password: string,
+//     ) {
+//         super(name, email, password, id);
+//         this.list = list;
+//     }
 
-    getList(): TodoList {
-        return this.list;
-    }
-}
+//     getList(): TodoList {
+//         return this.list;
+//     }
+// }

@@ -1,8 +1,9 @@
 import pool from './connection';
-import DB, { IdbData } from './Idb';
+import DB, { IdbData, IobjectPackage } from './Idb';
 import { DBuser, AuthUser } from '../models/user/user';
 import bcrypt from '../config/bcrypt';
 import { red } from 'colors';
+import { TodoList, Itodo } from 'models/service/Ilist';
 
 //A class that interacts with the DB
 
@@ -46,6 +47,7 @@ class MysqlDB implements DB {
         );
         return DbUser;
     }
+    //Search the user but with the ID
     async searchUserById(id: number): Promise<DBuser> {
         const sql = 'SELECT * FROM users WHERE id = ?';
         const rows: Array<IdbData> = await pool.query(sql, id);
@@ -57,6 +59,43 @@ class MysqlDB implements DB {
             DBdata.id,
         );
         return DbUser;
+    }
+
+    //A funtion that will return a user TODOLIST
+    async getTodoList(user: DBuser): Promise<TodoList> {
+        const sql: string = 'SELECT * FROM list WHERE username = ?';
+        const rows: TodoList = await pool.query(sql, user.getUsername());
+        return rows;
+    }
+
+    //This function will add a TODO to the List
+    async addTodo(user: DBuser, todo: string): Promise<boolean> {
+        const sql: string = 'INSERT INTO list(todo,username) VALUES(?,?)';
+        const rows: IobjectPackage = await pool.query(sql, [todo, user.getUsername()]);
+        if (typeof rows === 'object') {
+            if (rows.affectedRows !== 1) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    //This delete a TODO from the list
+    async deleteTodo(user: DBuser, todo: Itodo): Promise<boolean> {
+        const sql: string = 'DELETE FROM list WHERE id = ? AND username = ?';
+        const rows: IobjectPackage = await pool.query(sql, [todo.id, user.getUsername()]);
+        if (typeof rows === 'object') {
+            if (rows.affectedRows !== 1) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
     }
 
     //Function to show if the username extists
