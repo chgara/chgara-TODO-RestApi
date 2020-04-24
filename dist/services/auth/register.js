@@ -22,12 +22,7 @@ class Register {
                 return false;
             }
             const success = yield Db.addUser(this.user);
-            if (success) {
-                return true;
-            }
-            else {
-                return false;
-            }
+            return success;
         });
     }
     //If the rest want the user we will give it

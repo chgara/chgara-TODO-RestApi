@@ -6,6 +6,7 @@ import AuthRoutes from './routes/authRoute';
 import IndexRoutes from './routes/indexRoute';
 import TodoListRoutes from './routes/todoListRoute';
 import pool from './db/connection';
+import cors from "cors";
 
 //Creating class to make server objects
 class App {
@@ -26,7 +27,9 @@ class App {
     }
 
     //Settings configuration for express
-    settings(): void {}
+    settings(): void {
+	this.app.use(cors());
+    }
 
     //Midlewares that use the app
     midlewares(): void {

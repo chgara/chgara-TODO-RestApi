@@ -24,14 +24,13 @@ class MysqlDB implements DB {
 
     //Compare users returning a boolean
     async compareUsers(user: AuthUser): Promise<boolean> {
-        const DbUser: DBuser = await this.searchUser(user.getEmail());
-        const success: boolean = bcrypt.comparePassword(user.getAuth(), DbUser.getAuth());
-
-        if (success) {
-            return true;
-        } else {
+        const existentEmail: boolean = await this.findEmail(user.getEmail());
+        if (!existentEmail) {
             return false;
         }
+        const DbUser: DBuser = await this.searchUser(user.getEmail());
+        const success: boolean = bcrypt.comparePassword(user.getAuth(), DbUser.getAuth());
+        return success;
     }
 
     //With this function we find a user and we return a DB user

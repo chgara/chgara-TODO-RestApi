@@ -22,12 +22,7 @@ class Login {
                 return false;
             }
             const success = yield Db.compareUsers(this.user);
-            if (success) {
-                return true;
-            }
-            else {
-                return false;
-            }
+            return success;
         });
     }
     //If the rest want the user we will give it

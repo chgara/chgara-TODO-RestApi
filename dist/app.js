@@ -10,6 +10,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const authRoute_1 = __importDefault(require("./routes/authRoute"));
 const indexRoute_1 = __importDefault(require("./routes/indexRoute"));
 const todoListRoute_1 = __importDefault(require("./routes/todoListRoute"));
+const cors_1 = __importDefault(require("cors"));
 //Creating class to make server objects
 class App {
     constructor(port) {
@@ -25,7 +26,9 @@ class App {
         this.listen();
     }
     //Settings configuration for express
-    settings() { }
+    settings() {
+        this.app.use(cors_1.default());
+    }
     //Midlewares that use the app
     midlewares() {
         this.app.use(express_1.default.json());

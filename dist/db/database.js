@@ -34,14 +34,13 @@ class MysqlDB {
     //Compare users returning a boolean
     compareUsers(user) {
         return __awaiter(this, void 0, void 0, function* () {
-            const DbUser = yield this.searchUser(user.getEmail());
-            const success = bcrypt_1.default.comparePassword(user.getAuth(), DbUser.getAuth());
-            if (success) {
-                return true;
-            }
-            else {
+            const existentEmail = yield this.findEmail(user.getEmail());
+            if (!existentEmail) {
                 return false;
             }
+            const DbUser = yield this.searchUser(user.getEmail());
+            const success = bcrypt_1.default.comparePassword(user.getAuth(), DbUser.getAuth());
+            return success;
         });
     }
     //With this function we find a user and we return a DB user
