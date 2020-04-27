@@ -35,12 +35,14 @@ class MysqlDB {
     compareUsers(user) {
         return __awaiter(this, void 0, void 0, function* () {
             const existentEmail = yield this.findEmail(user.getEmail());
-            if (!existentEmail) {
+            if (existentEmail) {
+                const DbUser = yield this.searchUser(user.getEmail());
+                const success = bcrypt_1.default.comparePassword(user.getAuth(), DbUser.getAuth());
+                return success;
+            }
+            else {
                 return false;
             }
-            const DbUser = yield this.searchUser(user.getEmail());
-            const success = bcrypt_1.default.comparePassword(user.getAuth(), DbUser.getAuth());
-            return success;
         });
     }
     //With this function we find a user and we return a DB user
@@ -123,7 +125,7 @@ class MysqlDB {
     //The same as the other but with a email
     findEmail(email) {
         return __awaiter(this, void 0, void 0, function* () {
-            const sql = 'SELECT * FROM users WHERE username = ?';
+            const sql = 'SELECT * FROM users WHERE email = ?';
             const rows = yield connection_1.default.query(sql, email);
             if (rows.length > 0) {
                 return true;

@@ -34,6 +34,11 @@ class App {
         this.app.use(express_1.default.json());
         this.app.use(express_1.default.urlencoded({ extended: false }));
         this.app.use(morgan_1.default('dev'));
+        this.app.use((req, res, next) => {
+            res.append('Access-Control-Allow-Headers', 'Content-Type');
+            res.append('Access-Control-Expose-Headers', 'token');
+            next();
+        });
     }
     //The routes that will be managed
     routes() {

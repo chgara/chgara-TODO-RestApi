@@ -25,12 +25,16 @@ class MysqlDB implements DB {
     //Compare users returning a boolean
     async compareUsers(user: AuthUser): Promise<boolean> {
         const existentEmail: boolean = await this.findEmail(user.getEmail());
-        if (!existentEmail) {
+        if (existentEmail) {
+            const DbUser: DBuser = await this.searchUser(user.getEmail());
+            const success: boolean = bcrypt.comparePassword(
+                user.getAuth(),
+                DbUser.getAuth(),
+            );
+            return success;
+        } else {
             return false;
         }
-        const DbUser: DBuser = await this.searchUser(user.getEmail());
-        const success: boolean = bcrypt.comparePassword(user.getAuth(), DbUser.getAuth());
-        return success;
     }
 
     //With this function we find a user and we return a DB user
@@ -110,7 +114,7 @@ class MysqlDB implements DB {
 
     //The same as the other but with a email
     private async findEmail(email: string): Promise<boolean> {
-        const sql = 'SELECT * FROM users WHERE username = ?';
+        const sql = 'SELECT * FROM users WHERE email = ?';
         const rows: Array<any> = await pool.query(sql, email);
         if (rows.length > 0) {
             return true;

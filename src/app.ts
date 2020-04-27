@@ -6,7 +6,7 @@ import AuthRoutes from './routes/authRoute';
 import IndexRoutes from './routes/indexRoute';
 import TodoListRoutes from './routes/todoListRoute';
 import pool from './db/connection';
-import cors from "cors";
+import cors from 'cors';
 
 //Creating class to make server objects
 class App {
@@ -28,7 +28,7 @@ class App {
 
     //Settings configuration for express
     settings(): void {
-	this.app.use(cors());
+        this.app.use(cors());
     }
 
     //Midlewares that use the app
@@ -36,6 +36,11 @@ class App {
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: false }));
         this.app.use(morgan('dev'));
+        this.app.use((req, res, next) => {
+            res.append('Access-Control-Allow-Headers', 'Content-Type');
+            res.append('Access-Control-Expose-Headers', 'token');
+            next();
+        });
     }
 
     //The routes that will be managed
