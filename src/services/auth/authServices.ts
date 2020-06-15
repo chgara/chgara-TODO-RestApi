@@ -17,36 +17,44 @@ class AuthServices {
     //Register a user and returns false or a token.
     public async register(user: AuthUser): Promise<string> {
         const register: Register = new Register(user);
-        const success: boolean = await register.main(this.database);
+        try {
+            const success: boolean = await register.main(this.database);
 
-        if (!success) {
+            if (!success) {
+                return '';
+            } else {
+                const DbUser: DBuser = await register.getRegisterdUser(this.database);
+                const Token: string = jwt.sign(
+                    { _id: DbUser.getId() },
+                    process.env.JWT || 'secret token',
+                    { expiresIn: 60 * 60 * 24 * 7 },
+                );
+                return Token;
+            }
+        } catch (error) {
             return '';
-        } else {
-            const DbUser: DBuser = await register.getRegisterdUser(this.database);
-            const Token: string = jwt.sign(
-                { _id: DbUser.getId() },
-                process.env.JWT || 'secret token',
-                { expiresIn: 60 * 60 * 24 * 7 },
-            );
-            return Token;
         }
     }
 
     //Logs a user and returns false or a token
     public async login(user: AuthUser): Promise<string> {
         const login: Login = new Login(user);
-        const success: boolean = await login.main(this.database);
+        try {
+            const success: boolean = await login.main(this.database);
 
-        if (!success) {
+            if (!success) {
+                return '';
+            } else {
+                const DbUser: DBuser = await login.getLogedUser(this.database);
+                const Token: string = jwt.sign(
+                    { _id: DbUser.getId() },
+                    process.env.JWT || 'secret token',
+                    { expiresIn: 60 * 60 * 24 * 7 },
+                );
+                return Token;
+            }
+        } catch (error) {
             return '';
-        } else {
-            const DbUser: DBuser = await login.getLogedUser(this.database);
-            const Token: string = jwt.sign(
-                { _id: DbUser.getId() },
-                process.env.JWT || 'secret token',
-                { expiresIn: 60 * 60 * 24 * 7 },
-            );
-            return Token;
         }
     }
 
