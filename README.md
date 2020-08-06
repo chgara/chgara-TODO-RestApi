@@ -42,46 +42,27 @@ let generateProject = project => {
 
 ### Setup
 
-- If you want more syntax highlighting, format your code like this:
-
 > now install npm modules
 
 ```shell
 $ npm install
 ```
+
+> now run the code
+
+```shell
+$ npm start
+```
 ---
 
----
+> If you want to make changes in .ts files
 
-## Contributing
-
-> To get started...
-
-### Step 1
-
-- **Option 1**
-    - 🍴 Fork this repo!
-
-- **Option 2**
-    - 👯 Clone this repo to your local machine.
-
-### Step 2
-
-- **HACK AWAY!** 🔨🔨🔨
-
-### Step 3
-
-- 🔃 Create a new pull request using.
+```shell
+$ npm run dev
+```
 
 ---
 
-
-## Support
-
-Reach out to me at one of the following places!
-
-- Website at <a>`nothing now`</a>
-- Twitter at <a href="http://twitter.com/chema_garabito" target="_blank">`@chema_garabito`</a>
 
 ---
 
