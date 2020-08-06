@@ -1,27 +1,19 @@
-<img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fblog.usejournal.com%2Fdevelop-a-to-do-list-app-in-vanilla-javascript-95377ec370c5&psig=AOvVaw1tio_ENxOjf6yxDIDN-Egw&ust=1596803875050000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPjKnJTMhusCFQAAAAAdAAAAABAD" alt="Todo Image" />
+<img src="https://asp.mvc-tutorial.com/Images/ArticleImages/9/working-with-databases/todo_list.png" alt="Todo Image" />
 
 ***A Rest Api of a Todo Server***
 
 # TODO-List Rest-Api
 
-> A Rest API of a TODO-List made in Typescript 
+> A Rest API of a TODO-List made in Typescript and MySQL
 
-> You can log,register a new user or create TODOS
+> A Todo List server who saves the data on a SQL DB
 
-**Badges will go here**
+**Description**
 
-- Build-Status:Completed
-- Can add a type for payload in /src/routes/auth/verification.ts
-- For this proyect I haved use nodemon and concurrently as devDependencies, and all the @types
-- License: ISC
-
-[![Build Status](http://img.shields.io/travis/badges/badgerbadgerbadger.svg?style=flat-square)](https://travis-ci.org/badges/badgerbadgerbadger) [![Dependency Status](http://img.shields.io/gemnasium/badges/badgerbadgerbadger.svg?style=flat-square)](https://gemnasium.com/badges/badgerbadgerbadger) [![Coverage Status](http://img.shields.io/coveralls/badges/badgerbadgerbadger.svg?style=flat-square)](https://coveralls.io/r/badges/badgerbadgerbadger) [![Code Climate](http://img.shields.io/codeclimate/github/badges/badgerbadgerbadger.svg?style=flat-square)](https://codeclimate.com/github/badges/badgerbadgerbadger) [![Github Issues](http://githubbadges.herokuapp.com/badges/badgerbadgerbadger/issues.svg?style=flat-square)](https://github.com/badges/badgerbadgerbadger/issues) [![Pending Pull-Requests](http://githubbadges.herokuapp.com/badges/badgerbadgerbadger/pulls.svg?style=flat-square)](https://github.com/badges/badgerbadgerbadger/pulls) [![Gem Version](http://img.shields.io/gem/v/badgerbadgerbadger.svg?style=flat-square)](https://rubygems.org/gems/badgerbadgerbadger) [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org) [![Badges](http://img.shields.io/:badges-9/9-ff6799.svg?style=flat-square)](https://github.com/badges/badgerbadgerbadger)
-
-
-[![INSERT YOUR GRAPHIC HERE](http://i.imgur.com/dt8AUb6.png)]()
-
--This, Rest-API were writed in Typescript.
--As DB I have used MYSQL.
+- DB used: MySQL, a relational DB. (You can use another DB if you override the database.ts and mantain it's interface).
+- Used Typescript insted of Javascript to ensure the code maintainability.
+- For this proyect I used express as main dependenci to develop this web app.
+- License: MIT
 
 ---
 
