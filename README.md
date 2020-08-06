@@ -1,8 +1,6 @@
-<a href="http://fvcproductions.com"><img src="https://avatars1.githubusercontent.com/u/4284691?v=3&s=200" title="FVCproductions" alt="FVCproductions"></a>
+<img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fblog.usejournal.com%2Fdevelop-a-to-do-list-app-in-vanilla-javascript-95377ec370c5&psig=AOvVaw1tio_ENxOjf6yxDIDN-Egw&ust=1596803875050000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPjKnJTMhusCFQAAAAAdAAAAABAD" alt="Todo Image" />
 
-<!-- [![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](http://fvcproductions.com) -->
-
-***INSERT GRAPHIC HERE (include hyperlink in image)***
+***A Rest Api of a Todo Server***
 
 # TODO-List Rest-Api
 
