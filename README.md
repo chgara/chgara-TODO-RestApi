@@ -17,17 +17,68 @@
 
 ---
 
-## Example (Optional)
+## How to consume the API
+
+- **Authentication**
+
+  *All the URL of the API have a **token** validation* except post in /auth/login or /auth/register
+  
+  **-Token validation**:
+  
+     *In all the get or post req to the Api should have a header token with the token* **"token":"thetokenprovided"**
+    
+     The token will be provided in a req post in /auth/login or /auth/register, the server will send a response with the token in the header
+  
+
+- **Create/Register a new User:**
+
+  *Make a post in the url /api/auth/register*
+  
+  *Data required*: username, password, email
+  
+  **Ej:**
+  ```JSON
+  
+  {
+    "username":"admin",
+    "email":"admin@admin.com",
+    "password":"admin"
+  }
+  
+  ```
+  
+
+
+---
+
+## Change content
+
+- Mantain all the types and implement the interfaces to avoid errors
 
 ```Typescript
-// code away!
 
-let generateProject = project => {
-  let code = [];
-  for (let js = 0; js < project.length; js++) {
-    code.push(js);
-  }
-};
+//Delete this code
+
+class MySQL implements db{
+
+//All the methods of db are here
+//Some stuff methods
+
+}
+export default MySQL;
+```
+
+```Typescript
+
+
+//Rewrite the code
+
+class MongoDB implements db{
+
+//Implements all the methods of db correctly
+
+}
+export default MongoDB;
 ```
 
 ---
