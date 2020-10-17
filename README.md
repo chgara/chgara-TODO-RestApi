@@ -1,43 +1,84 @@
-<a href="http://fvcproductions.com"><img src="https://avatars1.githubusercontent.com/u/4284691?v=3&s=200" title="FVCproductions" alt="FVCproductions"></a>
+<img src="https://asp.mvc-tutorial.com/Images/ArticleImages/9/working-with-databases/todo_list.png" alt="Todo Image" />
 
-<!-- [![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](http://fvcproductions.com) -->
-
-***INSERT GRAPHIC HERE (include hyperlink in image)***
+***A Rest Api of a Todo Server***
 
 # TODO-List Rest-Api
 
-> A Rest API of a TODO-List made in Typescript 
+> A Rest API of a TODO-List made in Typescript and MySQL
 
-> You can log,register a new user or create TODOS
+> A Todo List server who saves the data on a SQL DB
 
-**Badges will go here**
+**Description**
 
-- Build-Status:Completed
-- Can add a type for payload in /src/routes/auth/verification.ts
-- For this proyect I haved use nodemon and concurrently as devDependencies, and all the @types
-- License: ISC
-
-[![Build Status](http://img.shields.io/travis/badges/badgerbadgerbadger.svg?style=flat-square)](https://travis-ci.org/badges/badgerbadgerbadger) [![Dependency Status](http://img.shields.io/gemnasium/badges/badgerbadgerbadger.svg?style=flat-square)](https://gemnasium.com/badges/badgerbadgerbadger) [![Coverage Status](http://img.shields.io/coveralls/badges/badgerbadgerbadger.svg?style=flat-square)](https://coveralls.io/r/badges/badgerbadgerbadger) [![Code Climate](http://img.shields.io/codeclimate/github/badges/badgerbadgerbadger.svg?style=flat-square)](https://codeclimate.com/github/badges/badgerbadgerbadger) [![Github Issues](http://githubbadges.herokuapp.com/badges/badgerbadgerbadger/issues.svg?style=flat-square)](https://github.com/badges/badgerbadgerbadger/issues) [![Pending Pull-Requests](http://githubbadges.herokuapp.com/badges/badgerbadgerbadger/pulls.svg?style=flat-square)](https://github.com/badges/badgerbadgerbadger/pulls) [![Gem Version](http://img.shields.io/gem/v/badgerbadgerbadger.svg?style=flat-square)](https://rubygems.org/gems/badgerbadgerbadger) [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org) [![Badges](http://img.shields.io/:badges-9/9-ff6799.svg?style=flat-square)](https://github.com/badges/badgerbadgerbadger)
-
-
-[![INSERT YOUR GRAPHIC HERE](http://i.imgur.com/dt8AUb6.png)]()
-
--This, Rest-API were writed in Typescript.
--As DB I have used MYSQL.
+- DB used: MySQL, a relational DB. (You can use another DB if you override the database.ts and mantain it's interface).
+- Used Typescript insted of Javascript to ensure the code maintainability.
+- For this proyect I used express as main dependenci to develop this web app.
+- License: MIT
 
 ---
 
-## Example (Optional)
+## How to consume the API
+
+- **Authentication**
+
+  *All the URL of the API have a **token** validation* except post in /auth/login or /auth/register
+  
+  **-Token validation**:
+  
+     *In all the get or post req to the Api should have a header token with the token* **"token":"thetokenprovided"**
+    
+     The token will be provided in a req post in /auth/login or /auth/register, the server will send a response with the token in the header
+  
+
+- **Create/Register a new User:**
+
+  *Make a post in the url /api/auth/register*
+  
+  *Data required*: username, password, email
+  
+  **Ej:**
+  ```JSON
+  
+  {
+    "username":"admin",
+    "email":"admin@admin.com",
+    "password":"admin"
+  }
+  
+  ```
+  
+
+
+---
+
+## Change content
+
+- Mantain all the types and implement the interfaces to avoid errors
 
 ```Typescript
-// code away!
 
-let generateProject = project => {
-  let code = [];
-  for (let js = 0; js < project.length; js++) {
-    code.push(js);
-  }
-};
+//Delete this code
+
+class MySQL implements db{
+
+//All the methods of db are here
+//Some stuff methods
+
+}
+export default MySQL;
+```
+
+```Typescript
+
+
+//Rewrite the code
+
+class MongoDB implements db{
+
+//Implements all the methods of db correctly
+
+}
+export default MongoDB;
 ```
 
 ---
@@ -52,46 +93,27 @@ let generateProject = project => {
 
 ### Setup
 
-- If you want more syntax highlighting, format your code like this:
-
 > now install npm modules
 
 ```shell
 $ npm install
 ```
+
+> now run the code
+
+```shell
+$ npm start
+```
 ---
 
----
+> If you want to make changes in .ts files
 
-## Contributing
-
-> To get started...
-
-### Step 1
-
-- **Option 1**
-    - 🍴 Fork this repo!
-
-- **Option 2**
-    - 👯 Clone this repo to your local machine.
-
-### Step 2
-
-- **HACK AWAY!** 🔨🔨🔨
-
-### Step 3
-
-- 🔃 Create a new pull request using.
+```shell
+$ npm run dev
+```
 
 ---
 
-
-## Support
-
-Reach out to me at one of the following places!
-
-- Website at <a>`nothing now`</a>
-- Twitter at <a href="http://twitter.com/chema_garabito" target="_blank">`@chema_garabito`</a>
 
 ---
 
@@ -100,4 +122,4 @@ Reach out to me at one of the following places!
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
 - **[MIT license](http://opensource.org/licenses/mit-license.php)**
-- Copyright 2015 © <a href="http://fvcproductions.com" target="_blank">FVCproductions</a>.
+- Copyright 2020 chgara.
