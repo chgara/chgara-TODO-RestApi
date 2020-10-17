@@ -2,7 +2,6 @@ import pool from './connection';
 import DB, { IdbData, IobjectPackage } from './Idb';
 import { DBuser, AuthUser } from '../models/user/user';
 import bcrypt from '../config/bcrypt';
-import { red } from 'colors';
 import { TodoList, Itodo } from 'models/service/Ilist';
 
 //A class that interacts with the DB
