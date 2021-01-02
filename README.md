@@ -8,6 +8,8 @@
 
 > A Todo List server who saves the data on a SQL DB
 
+> You can try it in this [link](https://chgara-todolist-server.herokuapp.com/api), you will need and rest client like Insomnia.
+
 **Description**
 
 - DB used: MySQL, a relational DB. (You can use another DB if you override the database.ts and mantain it's interface).
