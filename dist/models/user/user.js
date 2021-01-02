@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.DBuser = exports.AuthUser = exports.PrimitiveUser = void 0;
 /*
  *   Classes for user models
  */

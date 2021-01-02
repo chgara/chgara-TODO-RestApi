@@ -11,6 +11,10 @@ const authRoute_1 = __importDefault(require("./routes/authRoute"));
 const indexRoute_1 = __importDefault(require("./routes/indexRoute"));
 const todoListRoute_1 = __importDefault(require("./routes/todoListRoute"));
 const cors_1 = __importDefault(require("cors"));
+const path_1 = __importDefault(require("path"));
+const dir = path_1.default.resolve(__dirname, '../.env');
+console.log(dir);
+dotenv_1.default.config({ path: dir });
 //Creating class to make server objects
 class App {
     constructor(port) {
@@ -18,7 +22,6 @@ class App {
         this.port = process.env.PORT || port || 3000;
         this.app = express_1.default();
         //Configuring for catch the variables of the system
-        dotenv_1.default.config();
         this.settings();
         this.midlewares();
         this.routes();

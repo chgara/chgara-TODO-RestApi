@@ -19,8 +19,12 @@ class Keys {
         return this.database;
     }
 }
+const host = process.env.DBHOST || 'hola';
 const password = process.env.DBPASS || dbPwd_1.default.getPassword();
-const Db = new Keys(5, 'localhost', 'root', password, 'TODOLIST');
+const user = process.env.DBUSER || 'root';
+const name = process.env.DBNAME || 'TODOLIST';
+console.log(host, password, user, name);
+const Db = new Keys(2, host, user, password, name);
 /*const Db: Ikey = new Keys(
     5,
     'localhost',

@@ -19,6 +19,7 @@ function verify(req, res, next) {
             return;
         }
         if (payload) {
+            //@ts-expect-error
             req.userId = payload._id;
         }
     });
